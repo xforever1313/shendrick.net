@@ -3,3 +3,5 @@ obj/
 .vs/
 .nuget/
 *.suo
+packages/
+_site

@@ -2,7 +2,7 @@ pretzel:
     engine: razor
 
 # Site settings
-author: # name of the author
-title: # site title
-url: # site url
-contact: # mail of the author
+author: Seth Hendrick
+title: CE++
+url: https://www.shendrick.net
+contact: seth@shendrick.net
