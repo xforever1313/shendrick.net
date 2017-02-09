@@ -84,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="page.cshtml" />
     <Compile Include="PretzelClasses\Category.cs" />
     <Compile Include="PretzelClasses\NonProcessedPage.cs" />
     <Compile Include="PretzelClasses\Page.cs" />
@@ -108,9 +109,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\_includes\head.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
