@@ -57,7 +57,7 @@
             <!-- Start Side Bar -->
             <ul id="sidebar" role="complementary">
                 <li id="categories-2" class="widget widget_categories">
-                    <h2 class="widget-title">Categories</h2>
+                    <h2 class="widget-title">Blog Categories</h2>
                     <ul>
                         @{
                             foreach( var cat in @Model.Site.Categories )
@@ -88,6 +88,22 @@
                     </div>
                 </li>
                 <li id="text-3" class="widget widget_text">
+                    <h2 class="widget-title">Recent Posts:</h2>
+                    <div class="textwidget">
+                        <ul>
+                            @{
+                                var numberPosts = 5;
+                            }
+                            @for( var i = 0; i < numberPosts && i < Model.Site.Posts.Count; i++ )
+                            {
+                                var post = Model.Site.Posts[i];
+
+                                @:<li><a href="@post.Url">@post.Title</a></li>
+                            }
+                        </ul>
+                    </div>
+                </li>
+                <li id="text-4" class="widget widget_text">
                     <div class="textwidget">Opinions are mine.</div>
                 </li>
             </ul>
