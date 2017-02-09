@@ -4,9 +4,9 @@ layout: layout
 @inherits RazorEngine.Templating.TemplateBase<Pretzel.Logic.Templating.Context.PageContext>
 
 <div class="title">
-    <h2 class="entry-title"><a href="@Model.Page.Url" rel="bookmark"></a>@Model.Page.Title</h2>
+    <h2 class="entry-title"><a href="@Model.Page.Url" rel="bookmark">@Model.Page.Title</a></h2>
     <div class="entry-byline">
-        <span>Posted on @Model.Page.Date.ToString( "g" )</span>
+        <p>Posted on @Model.Page.Date.ToString( "g" )</p>
     </div>
     <div class="entry-meta">
         <p>

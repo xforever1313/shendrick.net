@@ -108,6 +108,9 @@
     <Content Include="post.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\blog.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="..\_includes\head.cshtml" />
   </ItemGroup>
   <PropertyGroup>
