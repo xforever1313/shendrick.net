@@ -1,24 +1,105 @@
 @inherits RazorEngine.Templating.TemplateBase<Pretzel.Logic.Templating.Context.PageContext>
+@using System.Text;
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-@Include("head.cshtml")
-<body>
-    <div id="container">
-        <div id="side">
-            <a href="/" id="home" title="home" alt="home"><img src="/img/logo.png" alt="Site Name" /></a>
-            <div id="hometext"><a href="/">@Model.Site.Title</a></div>
-            <div class="section">
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html id="ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8) ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+@Include( "head.cshtml" )
+<body class="home blog custom-background">
+    <div id="container" class="contain">
+
+        <!-- Title -->
+        <div id="page-wrap" class="contain">
+            <header id="branding" role="banner">
+                <h1 id="site-title"><a href="/">CE++</a></h1>
+                <h2 id="site-description">Ramblings of a Computer Engineer.</h2>
+            </header>
+        </div>
+        <!-- End Title -->
+        <!-- Navigation -->
+        <nav id="menu" role="navigation">
+            <div id="primary-menu" class="menu">
                 <ul>
-                    <li><a href="/about.html">about</a></li>
+                    <li><a href="/">Home</a></li>
+                    @{
+                        List<string> ignorePages = new List<string>() { "/", "/atom.xml", "/rss.xml", "/sitemap.xml" };
+
+                        foreach( var page in @Model.Site.Pages )
+                        {
+                            if( ( ignorePages.Contains( @page.Id ) == false ) && ( string.IsNullOrEmpty( @page.Id ) == false ) )
+                            {
+                                @:<li><a href="@page.Url">@page.Title</a></li>
+                            }
+                        }
+                    }
                     <li><a href="/rss.xml"><img src="/img/25.png" /> feed</a></li>
                 </ul>
             </div>
-        </div>
-        <div id="content">
-            @Raw(Model.Content)
+        </nav>
+        <!-- End Navigation -->
+
+        <div id="container" class="contain">
+            <!-- Start Content -->
+            <div id="main" role="main">
+                <article id="@Model.Page.Id">
+                    @Raw( Model.Content )
+                </article>
+            </div>
+            <!-- End Content -->
+
+            <!-- Start Side Bar -->
+            <ul id="sidebar" role="complementary">
+                <li id="categories-2" class="widget widget_categories">
+                    <h2 class="widget-title">Categories</h2>
+                    <ul>
+                        @{
+                            foreach( var cat in @Model.Site.Categories )
+                            {
+                                @:
+                                <li><a href="/category/@cat.Name">@cat.Name</a></li>
+                            }
+                        }
+                    </ul>
+                </li>
+                <li id="text-2" class="widget widget_text">
+                    <h2 class="widget-title">Links</h2>
+                    <div class="textwidget">
+                        You can find more of me by clicking the links below:
+                        <ul>
+                            <li><a href="https://www.linkedin.com/pub/seth-hendrick/47/847/615" target="_blank">Linkedin</a></li>
+                            <li><a href="https://twitter.com/xforever1313" target="_blank">Twitter</a></li>
+                            <li><a href="https://github.com/xforever1313" target="_blank">GitHub</a></li>
+                            <li><a href="https://bitbucket.org/xforever1313" target="_blank">Bitbucket</a></li>
+                            <li><a href="https://gitlab.com/u/xforever1313" target="_blank">GitLab</a></li>
+                            <li><a href="http://troopstories.shendrick.net/" target="_blank">Troop Stories - Stories from my days in Boy Scouts</a></li>
+                        </ul>
+                        <br />
+                        <a style="display:inline-block;background-color:#FC4C02;color:#fff;padding:5px 10px 5px 30px;font-size:11px;font-family:Helvetica, Arial, sans-serif;white-space:nowrap;text-decoration:none;background-repeat:no-repeat;background-position:10px center;border-radius:3px;background-image:url('http://badges.strava.com/logo-strava-echelon.png')" href='http://strava.com/athletes/14128419/badge' target="_clean">
+                            Follow me on
+                            <img src='http://badges.strava.com/logo-strava.png' alt='Strava' style='margin-left:2px;vertical-align:text-bottom' height=13 width=51 />
+                        </a>
+                    </div>
+                </li>
+                <li id="text-3" class="widget widget_text">
+                    <div class="textwidget">Opinions are mine.</div>
+                </li>
+            </ul>
+            <!-- End Side Bar -->
         </div>
     </div>
+    <footer id="colophon" role="contentinfo">
+        <div id="site-generator">
+            Theme: Parament by <a href="http://automattic.com/" rel="designer">Automattic</a>.
+        </div>
+    </footer>
+
     <script src="//cdn.jsdelivr.net/highlight.js/8.4/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 </body>
