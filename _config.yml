@@ -1,6 +1,8 @@
 pretzel: 
     engine: razor
 
+category_pages_layout: category
+
 # Site settings
 author: Seth Hendrick
 title: CE++

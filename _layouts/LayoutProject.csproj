@@ -52,6 +52,9 @@
     <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <Private>False</Private>
     </Reference>
+    <Reference Include="Pretzel.Categories">
+      <HintPath>..\_plugins\Pretzel.Categories.dll</HintPath>
+    </Reference>
     <Reference Include="RazorEngine">
       <HintPath>packages\RazorEngine.3.2.0\lib\net40\RazorEngine.dll</HintPath>
     </Reference>
@@ -85,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="page.cshtml" />
+    <None Include="category.cshtml" />
     <Compile Include="PretzelClasses\Category.cs" />
     <Compile Include="PretzelClasses\NonProcessedPage.cs" />
     <Compile Include="PretzelClasses\Page.cs" />
@@ -108,7 +112,7 @@
     <Content Include="post.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\blog.cshtml" />
+    <Content Include="blog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\_includes\head.cshtml" />

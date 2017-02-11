@@ -60,10 +60,12 @@
                     <h2 class="widget-title">Blog Categories</h2>
                     <ul>
                         @{
-                            foreach( var cat in @Model.Site.Categories )
+                            foreach( var page in Model.Site.Pages )
                             {
-                                @:
-                                <li><a href="/category/@cat.Name">@cat.Name</a></li>
+                                if( page.Bag.ContainsKey( "category" ) )
+                                {
+                                    @:<li><a href="@(page.Url)">@page.Bag["category"]</a></li>
+                                }
                             }
                         }
                     </ul>
