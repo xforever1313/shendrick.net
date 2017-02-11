@@ -14,7 +14,16 @@ layout: layout
             @{
                 foreach( string category in Model.Page.Categories )
                 {
-                    @:<a href="/category/@category">@category</a>,
+                    foreach( var page in Model.Site.Pages )
+                    {
+                        if( page.Bag.ContainsKey( "category" ) )
+                        {
+                            if( category.Equals( page.Bag["category"] ) )
+                            {
+                                @:<a href="@(page.Url)">@(category)</a>,
+                            }
+                        }
+                    }
                 }
             }
         </p>
@@ -23,7 +32,16 @@ layout: layout
             @{
                 foreach( string tag in Model.Page.Tags )
                 {
-                    @:<a href="/tag/@tag">@tag</a>,
+                    foreach( var page in Model.Site.Pages )
+                    {
+                        if( page.Bag.ContainsKey( "tag" ) )
+                        {
+                            if( tag.Equals( page.Bag["tag"] ) )
+                            {
+                                @:<a href="@(page.Url)">@(tag)</a>,
+                            }
+                        }
+                    }
                 }
             }
         </p>
@@ -50,9 +68,9 @@ layout: layout
 </nav>
 
 
-    @if( Model.Comments )
-    {
-        <div id="disqus_thread"></div>
+@if( Model.Comments )
+{
+    <div id="disqus_thread"></div>
         <script type="text/javascript">
             /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
             var disqus_shortname = 'shendrick-net';
@@ -69,4 +87,4 @@ layout: layout
         </script>
         <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-    }
+}

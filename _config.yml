@@ -2,6 +2,7 @@ pretzel:
     engine: razor
 
 category_pages_layout: category
+tag_pages_layout: tag
 
 # Site settings
 author: Seth Hendrick

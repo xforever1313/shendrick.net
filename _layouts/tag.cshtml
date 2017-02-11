@@ -5,20 +5,21 @@ layout : page
 @inherits RazorEngine.Templating.TemplateBase<Pretzel.Logic.Templating.Context.PageContext>
 
 @{
-    object catName = Model.Page.Bag["category"];
+    object tagName = Model.Page.Bag["tag"];
 }
 
 <div>
-    <h1>Category: @catName</h1>
+    <h1>Tag: @tagName</h1>
     <ul>
         @{
-            foreach( var cat in @Model.Site.Categories )
+            foreach( var cat in @Model.Site.Tags )
             {
-                if( cat.Name.Equals( catName ) )
+                if( cat.Name.Equals( tagName ) )
                 {
                     foreach( var post in cat.Posts )
                     {
-                        @:<li><a href="@post.Url">@post.Title</a></li>
+                        @:
+                        <li><a href="@post.Url">@post.Title</a></li>
                     }
                 }
             }
