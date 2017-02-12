@@ -97,6 +97,7 @@
     <Compile Include="PretzelClasses\SiteContext.cs" />
     <Compile Include="PretzelClasses\Tag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="tag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\css\style.css" />
