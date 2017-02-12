@@ -3,10 +3,12 @@ layout: layout
 ---
 @inherits RazorEngine.Templating.TemplateBase<Pretzel.Logic.Templating.Context.PageContext>
 
-<div class="title">
-    <h2 class="entry-title"><a href="@Model.Page.Url" rel="bookmark"></a>@Model.Page.Title</h2>
-</div>
+<article id="@Model.Page.Id" class="contain post type-post status-publish format-standard hentry">
+    <div class="title">
+        <h2 class="entry-title"><a href="@Model.Page.Url" rel="bookmark"></a>@Model.Page.Title</h2>
+    </div>
 
-<div class="entry-content">
-    @Raw( Model.Content )
-</div>
+    <div class="entry-content">
+        @Raw( Model.Content )
+    </div>
+</article>

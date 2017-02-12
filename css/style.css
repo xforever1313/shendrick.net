@@ -12,7 +12,7 @@ Tags: black, dark, orange, two-columns, fixed-width, custom-background, custom-h
 
 
 body {
-	background: #202228 url( images/diagonal-stripes-010.png );
+	background: #202228 url( /img/diagonal-stripes-010.png );
 	color: #989eae;
 	font-size: 14px;
 	margin: 0;
@@ -589,7 +589,7 @@ h2.entry-title {
 	letter-spacing: .025em;
 	line-height: 30px;
 	margin: 0;
-	padding: 0.5em;
+	padding: 0;
 }
 h2.entry-title a {
 	color: #bfc3cf;
@@ -602,8 +602,28 @@ h2.entry-title a:hover {
 	background: #d24d04;
 	border: 1px solid #ff5a00;
 	color: #fff;
+	display: block;
+	font-size: 12px;
+	line-height: 1;
+	position: absolute;
+	top: -15px;
+	left: -10px;
 	text-shadow: #000 1px 1px 2px;
-    padding-left:50px;
+    padding:0.2em;
+}
+.entry-byline a {
+	color: #fff;
+	font-style: italic;
+}
+.entry-byline span,
+.entry-byline .post-edit-link {
+	display:block;
+	float: left;
+	padding: 4px 6px;
+}
+.entry-byline .post-edit-link {
+	background: #ff5a00;
+	font-style: normal;
 }
 .entry-content {
 	overflow: hidden;
@@ -664,6 +684,13 @@ div.entry-navigation {
 	background-color: #ff5a00;
 	border-bottom: 1px solid #d24d04;
 	padding: 8px 15px;
+}
+.sticky .entry-byline {
+	border-width: 0;
+	top: -14px;
+}
+.sticky .entry-byline span {
+	display: none;
 }
 .sticky h2.entry-title {
 	text-shadow: #000 1px 1px 2px;

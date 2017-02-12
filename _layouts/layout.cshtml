@@ -13,7 +13,7 @@
 <!--<![endif]-->
 @Include( "head.cshtml" )
 <body class="home blog custom-background">
-    <div id="container" class="contain">
+    <div id="page-wrap" class="contain">
 
         <!-- Title -->
         <div id="page-wrap" class="contain">
@@ -69,9 +69,7 @@
         <div id="container" class="contain">
             <!-- Start Content -->
             <div id="main" role="main">
-                <article id="@Model.Page.Id">
-                    @Raw( Model.Content )
-                </article>
+                @Raw( Model.Content )
             </div>
             <!-- End Content -->
 

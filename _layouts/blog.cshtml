@@ -1,45 +1,49 @@
 ---
-layout : page
+layout : layout
 ---
 
 @inherits RazorEngine.Templating.TemplateBase<Pretzel.Logic.Templating.Context.PageContext>
 
-<ul class="posts">
-    @{
-        var numberPosts = 5;
-    }
-    @for( var i = 0; i < numberPosts && i < Model.Site.Posts.Count; i++ )
-    {
-        var post = Model.Site.Posts[i];
-        <li>
-            <div class="idea">
-                @if( i == 0 && post.Layout == "post" )
-                {
-                    <div class="title">
-                        <h2 class="entry-title"><a href="@post.Url" rel="bookmark">@post.Title</a></h2>
-                        <div class="entry-byline" style="padding-left:50px;">
-                            <p>Posted on @post.Date.ToString( "g" )</p>
-                        </div>
+@{
+    var numberPosts = 5;
+}
+@for( var i = 0; i < numberPosts && i < Model.Site.Posts.Count; i++ )
+{
+    var post = Model.Site.Posts[i];
+    <div class="idea">
+        @if( i == 0 && post.Layout == "post" )
+        {
+            <article id="@post.Id" class="contain post type-post status-publish format-standard hentry">
+                <div class="title">
+                    <h2 class="entry-title"><a href="@post.Url" rel="bookmark">@post.Title</a></h2>
+                    <div class="entry-byline">
+                        <p>Posted on @post.Date.ToString( "D" )</p>
                     </div>
+                </div>
+                <div class="entry-content">
                     @Raw( post.Content )
                     <br />
                     <a href="@post.Url#disqus_thread">Comments</a>
-                }
-                else
-                {
-                    <div class="title">
-                        <h2 class="entry-title"><a href="@post.Url" rel="bookmark">@post.Title</a></h2>
-                        <div class="entry-byline" style="padding-left:50px;">
-                            <p>Posted on @post.Date.ToString( "g" )</p>
-                        </div>
+                </div>
+            </article>
+        }
+        else
+        {
+            <article id="@post.Id" class="contain post type-post status-publish format-standard hentry">
+                <div class="title">
+                    <h2 class="entry-title"><a href="@post.Url" rel="bookmark">@post.Title</a></h2>
+                    <div class="entry-byline">
+                        <p>Posted on @post.Date.ToString( "D" )</p>
                     </div>
+                </div>
+                <div class="entry-content">
                     @Raw( post.Content )
                     <a href="@post.Url#disqus_thread">Comments</a>
-                }
-            </div>
-        </li>
-    }
-</ul>
+                </div>
+            </article>
+        }
+    </div>
+}
 
 @if( @Model.Site.Posts.Count > numberPosts )
 {
