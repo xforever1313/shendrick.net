@@ -5,3 +5,5 @@ obj/
 *.suo
 packages/
 _site
+.pretzel/
+public/
