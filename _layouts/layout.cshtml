@@ -27,19 +27,40 @@
         <nav id="menu" role="navigation">
             <div id="primary-menu" class="menu">
                 <ul>
-                    <li><a href="/">Home</a></li>
+                    <li class="page_item"><a href="/">Home</a></li>
+                    <li class="page_item page_item_has_children">
+                        <a href="/posts.html">Posts</a>
+                        <ul class="children">
+                            @{
+                                foreach( var category in Model.Site.Categories )
+                                {
+                                    foreach( var page in Model.Site.Pages )
+                                    {
+                                        if( page.Bag.ContainsKey( "category" ) )
+                                        {
+                                            if( category.Name.Equals( page.Bag["category"] ) )
+                                            {
+                                                @:<li class="page_item page-item-51"><a href="@(page.Url)">@(category.Name)</a></li>
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        </ul>
+                    </li>
                     @{
-                        List<string> ignorePages = new List<string>() { "/", "/atom.xml", "/rss.xml", "/sitemap.xml" };
+                        List<string> ignorePages = new List<string>() { "/", "/atom.xml", "/rss.xml", "/posts", "/sitemap.xml" };
 
                         foreach( var page in @Model.Site.Pages )
                         {
                             if( ( ignorePages.Contains( @page.Id ) == false ) && ( string.IsNullOrEmpty( @page.Id ) == false ) )
                             {
-                                @:<li><a href="@page.Url">@page.Title</a></li>
+                                @:
+                                <li class="page_item"><a href="@page.Url">@page.Title</a></li>
                             }
                         }
                     }
-                    <li><a href="/rss.xml"><img src="/img/25.png" /> feed</a></li>
+                    <li class="page_item"><a href="/rss.xml"><img src="/img/25.png" /> feed</a></li>
                 </ul>
             </div>
         </nav>
