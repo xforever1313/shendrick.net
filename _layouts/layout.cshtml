@@ -40,7 +40,8 @@
                                         {
                                             if( category.Name.Equals( page.Bag["category"] ) )
                                             {
-                                                @:<li class="page_item page-item-51"><a href="@(page.Url)">@(category.Name)</a></li>
+                                                @:
+                                                <li class="page_item page-item-51"><a href="@(page.Url)">@(category.Name)</a></li>
                                             }
                                         }
                                     }
@@ -53,15 +54,20 @@
 
                         foreach( var page in @Model.Site.Pages )
                         {
-                            if( ( ignorePages.Contains( @page.Id ) == false ) && ( string.IsNullOrEmpty( @page.Id ) == false ) )
+                            if(
+                                ( ignorePages.Contains( @page.Id ) == false ) &&
+                                ( string.IsNullOrEmpty( @page.Id ) == false ) &&
+                                ( @page.Id.Contains( ".well-known" ) == false ) // Don't include lets encrypt stuff.
+                            )
                             {
                                 @:
                                 <li class="page_item"><a href="@page.Url">@page.Title</a></li>
+                                }
                             }
                         }
-                    }
                     <li class="page_item"><a href="/rss.xml"><img src="/img/25.png" /> feed</a></li>
                 </ul>
+
             </div>
         </nav>
         <!-- End Navigation -->
