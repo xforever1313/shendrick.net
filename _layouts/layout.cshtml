@@ -89,7 +89,8 @@
                             {
                                 if( page.Bag.ContainsKey( "category" ) )
                                 {
-                                    @:<li><a href="@(page.Url)">@page.Bag["category"]</a></li>
+                                    @:
+                                    <li><a href="@(page.Url)">@page.Bag["category"]</a></li>
                                 }
                             }
                         }
@@ -125,12 +126,22 @@
                             {
                                 var post = Model.Site.Posts[i];
 
-                                @:<li><a href="@post.Url">@post.Title</a></li>
+                                @:
+                                <li><a href="@post.Url">@post.Title</a></li>
                             }
                         </ul>
                     </div>
                 </li>
                 <li id="text-4" class="widget widget_text">
+                    <div class="textwidget">
+                        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+                            <img alt="Creative Commons License CC BY-SA 4.0" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+                        </a>
+                        <br />
+                        Posts on <a href="https://www.shendrick.net">shendrick.net</a> are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+                    </div>
+                </li>
+                <li id="text-5" class="widget widget_text">
                     <div class="textwidget">Opinions are mine.</div>
                 </li>
             </ul>
