@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Home
+description: "Seth Hendrick's website!"
 comments: false
 ---
 

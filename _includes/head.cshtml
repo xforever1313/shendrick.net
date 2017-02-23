@@ -1,5 +1,24 @@
+@using System.Text;
+
 @inherits RazorEngine.Templating.TemplateBase<Pretzel.Logic.Templating.Context.PageContext>
 <head>
+    @{
+        StringBuilder builder = new StringBuilder();
+        foreach( string tag in Model.Page.Tags )
+        {
+            builder.Append( tag + ", " );
+        }
+
+        if( builder.ToString().Length > 0 )
+        {
+            @:<meta name="keywords" content="@(builder.ToString())" />
+        }
+
+        if( Model.Page.Bag.ContainsKey( "description" ) )
+        {
+            @:<meta name="description" content="@(Model.Page.Bag["description"])"/>
+        }
+    }
     <meta content="en-au" http-equiv="Content-Language" />
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Blog Feed" />

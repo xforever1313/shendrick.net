@@ -4,6 +4,7 @@ title: "C++: C-Style arrays vs. std::array vs. std::vector"
 author: "Seth Hendrick"
 comments: true
 category: "Coding Tips"
+description: "The difference between std::vector, std::array, and c-style arrays!"
 tags: [array, c++, c-style array, pointers, sizeof, stack, std-array, std-vector, vector]
 ---
 
