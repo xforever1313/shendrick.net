@@ -1,58 +1,106 @@
+@using System
+@using System.Collections.Generic
+@using System.Text
+@using Pretzel.Logic.Templating.Context
+@using Page = Pretzel.Logic.Templating.Context.Page
 @inherits RazorEngine.Templating.TemplateBase<Pretzel.Logic.Templating.Context.PageContext>
-@using System.Text;
 
 <!DOCTYPE html>
-<!--[if IE 7]>
-<html id="ie7" lang="en-US">
-<![endif]-->
-<!--[if IE 8]>
-<html id="ie8" lang="en-US">
-<![endif]-->
-<!--[if !(IE 7) | !(IE 8) ]><!-->
 <html lang="en-US">
-<!--<![endif]-->
-@Include( "head.cshtml" )
-<body class="home blog custom-background">
-    <div id="page-wrap" class="contain">
+<head>
+    <meta content="en-us" http-equiv="Content-Language" />
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    @{
+        StringBuilder tagBuilder = new StringBuilder();
+        foreach( string tag in Model.Page.Tags )
+        {
+            tagBuilder.Append( tag + "," );
+        }
+        if( tagBuilder.Length > 0 )
+        {
+            tagBuilder = tagBuilder.Remove( tagBuilder.Length - 1, 1 );
+            @:
+            <meta name="keywords" content="@tagBuilder.ToString()" />
+        }
 
-        <!-- Title -->
-        <div id="page-wrap" class="contain">
-            <header id="branding" role="banner">
-                <h1 id="site-title"><a href="/">CE++</a></h1>
-                <h2 id="site-description">Ramblings of a Computer Engineer.</h2>
-            </header>
-        </div>
-        <!-- End Title -->
-        <!-- Navigation -->
-        <nav id="menu" role="navigation">
-            <div id="primary-menu" class="menu">
-                <ul>
-                    <li class="page_item"><a href="/">Home</a></li>
-                    <li class="page_item page_item_has_children">
-                        <a href="/posts.html">Posts</a>
-                        <ul class="children">
-                            @{
-                                foreach( var category in Model.Site.Categories )
-                                {
-                                    foreach( var page in Model.Site.Pages )
-                                    {
-                                        if( page.Bag.ContainsKey( "category" ) )
-                                        {
-                                            if( category.Name.Equals( page.Bag["category"] ) )
-                                            {
-                                                @:
-                                                <li class="page_item page-item-51"><a href="@(page.Url)">@(category.Name)</a></li>
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        </ul>
+        if( Model.Page.Bag.ContainsKey( "description" ) )
+        {
+            @:
+            <meta name="description" content="@(Model.Page.Bag["description"])" />
+        }
+}
+
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Blog Feed" />
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Blog Feed" />
+    <link rel="shortcut icon" href="/static/img/favicon.ico" />
+
+    <title>@Model.Title</title>
+
+    <!-- BOOTSTRAP STYLES-->
+    <link href="/static/css/bootstrap.css" rel="stylesheet" />
+
+    <!-- FONTAWESOME STYLES-->
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!--CUSTOM BASIC STYLES-->
+    <link href="/static/css/basic.css" rel="stylesheet" />
+
+    <!--CUSTOM MAIN STYLES-->
+    <link href="/static/css/custom.css" rel="stylesheet" />
+
+    <!-- GOOGLE FONTS-->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
+    
+    <!-- Start Open Web Analytics Tracker -->
+    <script type="text/javascript">
+//<![CDATA[
+var owa_baseUrl = 'https://owa.shendrick.net/';
+var owa_cmds = owa_cmds || [];
+owa_cmds.push(['setSiteId', '0e4eb14f1c7f778aee0efec87bacf41b']);
+owa_cmds.push(['trackPageView']);
+owa_cmds.push(['trackClicks']);
+owa_cmds.push(['trackDomStream']);
+
+(function() {
+	var _owa = document.createElement('script'); _owa.type = 'text/javascript'; _owa.async = true;
+	owa_baseUrl = ('https:' == document.location.protocol ? window.owa_baseSecUrl || owa_baseUrl.replace(/http:/, 'https:') : owa_baseUrl);
+	_owa.src = owa_baseUrl + 'modules/base/js/owa.tracker-combined-min.js';
+	var _owa_s = document.getElementsByTagName('script')[0]; _owa_s.parentNode.insertBefore(_owa, _owa_s);
+}());
+//]]>
+    </script>
+    <!-- End Open Web Analytics Code -->
+
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Top row -->
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <!-- Top-left -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Side Bar -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li>
+                        <a href="/index.html"><img src="/static/img/me.jpg" width="240" height="240" /></a>
+                    </li>
+                    <li>
+                        <a href="/index.html"><i class="fa fa-home"></i>Home</a>
                     </li>
                     @{
                         List<string> ignorePages = new List<string>() { "/", "/atom.xml", "/rss.xml", "/posts", "/sitemap.xml" };
-
-                        foreach( var page in @Model.Site.Pages )
+                        foreach( Page page in Model.Site.Pages )
                         {
                             if(
                                 ( ignorePages.Contains( @page.Id ) == false ) &&
@@ -60,101 +108,75 @@
                                 ( @page.Id.Contains( ".well-known" ) == false ) // Don't include lets encrypt stuff.
                             )
                             {
-                                @:
-                                <li class="page_item"><a href="@page.Url">@page.Title</a></li>
-                                }
+                                @:<li><a href="@page.Url">@page.Title</a></li>
                             }
                         }
-                    <li class="page_item"><a href="/rss.xml"><img src="/img/25.png" /> feed</a></li>
+                    }
+                    <li>
+                        <a href="/posts.html"><i class="fa fa-file-text"></i>Posts<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            @foreach( var category in Model.Site.Categories )
+                            {
+                                foreach( var page in Model.Site.Pages )
+                                {
+                                    if( page.Bag.ContainsKey( "category" ) )
+                                    {
+                                        if( category.Name.Equals( page.Bag["category"] ) )
+                                        {
+                                            @:<li><a href="@(page.Url)"><i class="fa fa-circle-o"></i>@(category.Name)</a></li>
+                                        }
+                                    }
+                                }
+                            }
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-users"></i>Follow Me!<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="https://twitter.com/xforever1313"><i class="fa fa-twitter"></i>Twitter</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/xforever1313"><i class="fa fa-github"></i>GitHub</a>
+                            </li>
+                            <li>
+                                <a href="https://bitbucket.org/xforever1313/"><i class="fa fa-bitbucket"></i>GitHub</a>
+                            </li>
+                            <li>
+                                <a href="https://gitlab.com/xforever1313"><i class="fa fa-gitlab" aria-hidden="true"></i>GitLab</a>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/pub/seth-hendrick/47/847/615"><i class="fa fa-linkedin"></i>LinkedIn</a>
+                            </li>
+                            <li>
+                                <a href="https://www.strava.com/athletes/14128419"><i class="fa fa-map-signs" aria-hidden="true"></i>Strava</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
-
             </div>
         </nav>
-        <!-- End Navigation -->
 
-        <div id="container" class="contain">
-            <!-- Start Content -->
-            <div id="main" role="main">
-                @Raw( Model.Content )
-            </div>
-            <!-- End Content -->
-
-            <!-- Start Side Bar -->
-            <ul id="sidebar" role="complementary">
-                <li id="categories-2" class="widget widget_categories">
-                    <h2 class="widget-title">Categories</h2>
-                    <ul>
-                        @{
-                            foreach( var page in Model.Site.Pages )
-                            {
-                                if( page.Bag.ContainsKey( "category" ) )
-                                {
-                                    @:
-                                    <li><a href="@(page.Url)">@page.Bag["category"]</a></li>
-                                }
-                            }
-                        }
-                    </ul>
-                </li>
-                <li id="text-2" class="widget widget_text">
-                    <h2 class="widget-title">Links</h2>
-                    <div class="textwidget">
-                        You can find more of me by clicking the links below:
-                        <ul>
-                            <li><a href="https://www.linkedin.com/pub/seth-hendrick/47/847/615" target="_blank">Linkedin</a></li>
-                            <li><a href="https://twitter.com/xforever1313" target="_blank">Twitter</a></li>
-                            <li><a href="https://github.com/xforever1313" target="_blank">GitHub</a></li>
-                            <li><a href="https://bitbucket.org/xforever1313" target="_blank">Bitbucket</a></li>
-                            <li><a href="https://gitlab.com/u/xforever1313" target="_blank">GitLab</a></li>
-                            <li><a href="http://troopstories.shendrick.net/" target="_blank">Troop Stories - Stories from my days in Boy Scouts</a></li>
-                        </ul>
-                        <br />
-                        <a style="display:inline-block;background-color:#FC4C02;color:#fff;padding:5px 10px 5px 30px;font-size:11px;font-family:Helvetica, Arial, sans-serif;white-space:nowrap;text-decoration:none;background-repeat:no-repeat;background-position:10px center;border-radius:3px;background-image:url('http://badges.strava.com/logo-strava-echelon.png')" href='http://strava.com/athletes/14128419/badge' target="_clean">
-                            Follow me on
-                            <img src='http://badges.strava.com/logo-strava.png' alt='Strava' style='margin-left:2px;vertical-align:text-bottom' height=13 width=51 />
-                        </a>
-                    </div>
-                </li>
-                <li id="text-3" class="widget widget_text">
-                    <h2 class="widget-title">Recent Posts:</h2>
-                    <div class="textwidget">
-                        <ul>
-                            @{
-                                var numberPosts = 5;
-                            }
-                            @for( var i = 0; i < numberPosts && i < Model.Site.Posts.Count; i++ )
-                            {
-                                var post = Model.Site.Posts[i];
-
-                                @:
-                                <li><a href="@post.Url">@post.Title</a></li>
-                            }
-                        </ul>
-                    </div>
-                </li>
-                <li id="text-4" class="widget widget_text">
-                    <div class="textwidget">
-                        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
-                            <img alt="Creative Commons License CC BY-SA 4.0" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
-                        </a>
-                        <br />
-                        Posts on <a href="https://www.shendrick.net">shendrick.net</a> are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-                    </div>
-                </li>
-                <li id="text-5" class="widget widget_text">
-                    <div class="textwidget">Opinions are mine.</div>
-                </li>
-            </ul>
-            <!-- End Side Bar -->
+        <!-- Main Page -->
+        <div id="page-wrapper">
+            @Raw( Model.Content )
         </div>
     </div>
-    <footer id="colophon" role="contentinfo">
-        <div id="site-generator">
-            Theme: Parament by <a href="http://automattic.com/" rel="designer">Automattic</a>.
-        </div>
-    </footer>
 
-    <script src="//cdn.jsdelivr.net/highlight.js/8.4/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <!-- Footer -->
+    <div id="footer-sec">
+        &copy; @DateTime.Now.Year <a href="https://shendrick.net">Seth Hendrick</a> | Design By : <a href="http://www.binarytheme.com/" target="_blank">BinaryTheme.com</a>
+        <span>Page generated on @(DateTime.UtcNow.ToString( "R" ))</span>
+    </div>
+
+    <!-- SCRIPTS -AT THE BOTTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="/static/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="/static/js/bootstrap.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="/static/js/jquery.metisMenu.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="/static/js/custom.js"></script>
 </body>
 </html>
