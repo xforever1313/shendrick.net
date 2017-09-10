@@ -8,27 +8,30 @@ layout : layout
     object tagName = Model.Page.Bag["tag"];
 }
 
-<article id="@Model.Page.Id" class="contain post type-post status-publish format-standard hentry">
-    <div class="title">
-        <h2 class="entry-title"><a href="@Model.Page.Url" rel="bookmark">Tag: @tagName</a></h2>
+<article id="page-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-head-line">Tag: @tagName</h1>
+        </div>
     </div>
 
-    <div class="entry-content">
-        <ul>
-            @{
-                foreach( var cat in @Model.Site.Tags )
-                {
-                    if( cat.Name.Equals( tagName ) )
+    <div class="row">
+        <div class="col-md-12">
+            <ul>
+                @{
+                    foreach( var cat in @Model.Site.Tags )
                     {
-                        foreach( var post in cat.Posts )
+                        if( cat.Name.Equals( tagName ) )
                         {
-                            @:
-                            <li><a href="@post.Url">@post.Title</a></li>
+                            foreach( var post in cat.Posts )
+                            {
+                                @:<li><a href="@post.Url">@post.Title</a></li>
+                            }
                         }
                     }
                 }
-            }
-        </ul>
+            </ul>
+        </div>
     </div>
 </article>
 
