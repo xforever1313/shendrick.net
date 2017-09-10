@@ -248,6 +248,13 @@ ul#filters {
    Shendrick.net specific:
     =====================================================*/
 
+#main-title{
+    font-size: 30px;
+    color: #FFF;
+    font-weight: 800;
+    padding:0.5em;
+}
+    
 /* Image (Taken from thenaterhood.com)*/
 .image {
   border-radius: 0.35em;
