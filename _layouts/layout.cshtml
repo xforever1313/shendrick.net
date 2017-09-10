@@ -52,6 +52,9 @@
     <!-- GOOGLE FONTS-->
     <link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
     
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/8.4/styles/default.min.css" />
+
     <!-- Start Open Web Analytics Tracker -->
     <script type="text/javascript">
 //<![CDATA[
@@ -200,5 +203,13 @@ owa_cmds.push(['trackDomStream']);
     <script src="/static/js/jquery.metisMenu.js"></script>
     <!-- CUSTOM SCRIPTS -->
     <script src="/static/js/custom.js"></script>
+
+    @if( Model.Page.Bag.ContainsKey( "code" ) && Model.Page.Bag["code"].Equals( true ) )
+    {
+        <!-- Highlight.js -->
+        // Include highlight.js only if our page contains code.
+        <script src="//cdn.jsdelivr.net/highlight.js/8.4/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    }
 </body>
 </html>

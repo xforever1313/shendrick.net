@@ -6,6 +6,7 @@ comments: true
 category: "Coding Tips"
 description: "The difference between std::vector, std::array, and c-style arrays!"
 tags: [array, c++, c-style array, pointers, sizeof, stack, std-array, std-vector, vector]
+code: true
 ---
 
 Arrays are a very basic data structure used in programming.  Unlike linked lists, arrays are guaranteed have its elements contiguous in memory.  That is, someArray[0] is directly next to someArray[1] in memory.  However, in C++, there are three ways to use arrays:  C-style arrays, std::array (as of C++11) and std::vector.  What’s the difference between the three? Read on!
