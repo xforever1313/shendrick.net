@@ -4,71 +4,25 @@ layout : layout
 
 @inherits RazorEngine.Templating.TemplateBase<Pretzel.Logic.Templating.Context.PageContext>
 
-@{
-    var numberPosts = 5;
-}
-@for( var i = 0; i < numberPosts && i < Model.Site.Posts.Count; i++ )
-{
-    var post = Model.Site.Posts[i];
-    <div class="idea">
-        @if( i == 0 && post.Layout == "post" )
-        {
-            <article id="@post.Id" class="contain post type-post status-publish format-standard hentry">
-                <div class="title">
-                    <h2 class="entry-title"><a href="@post.Url" rel="bookmark">@post.Title</a></h2>
-                    <div class="entry-byline">
-                        <p>Posted on @post.Date.ToString( "D" )</p>
-                    </div>
-                </div>
-                <div class="entry-content">
-                    @Raw( post.Content )
-                    <br />
-                    <a href="@post.Url#disqus_thread">Comments</a>
-                </div>
-            </article>
-        }
-        else
-        {
-            <article id="@post.Id" class="contain post type-post status-publish format-standard hentry">
-                <div class="title">
-                    <h2 class="entry-title"><a href="@post.Url" rel="bookmark">@post.Title</a></h2>
-                    <div class="entry-byline">
-                        <p>Posted on @post.Date.ToString( "D" )</p>
-                    </div>
-                </div>
-                <div class="entry-content">
-                    @Raw( post.Content )
-                    <a href="@post.Url#disqus_thread">Comments</a>
-                </div>
-            </article>
-        }
+<article id="page-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-head-line">All Posts:</h1>
+        </div>
     </div>
-}
 
-@if( @Model.Site.Posts.Count > numberPosts )
-{
-    <h3>OLDER POSTS:</h3>
-    <ul class="postArchive">
-        @foreach( var post in Model.Site.Posts.Skip( numberPosts ) )
-        {
-            <li>
-                <span class="olderpostdate">@post.Date.ToString( "d m" )</span> <a class="postlink" href="@post.Url">@post.Title</a>
-            </li>
-        }
-    </ul>
-}
-
-<script type="text/javascript">
-//<![CDATA[
-(function () {
-    var links = document.getElementsByTagName('a');
-    var query = '?';
-    for (var i = 0; i < links.length; i++) {
-        if (links[i].href.indexOf('#disqus_thread') >= 0) {
-            query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
-        }
-    }
-    document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/DISQUS_NAME/get_num_replies.js' + query + '"></' + 'script>');
-})();
-//]]>
-</script>
+    <div class="row">
+        <div class="col-md-12">
+            <ul>
+                @{
+                    foreach( var post in @Model.Site.Posts )
+                    {
+                        @:<li>
+                        @:    <a href="@post.Url">@post.Title</a> - @post.Bag["description"]
+                        @:</li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</article>
