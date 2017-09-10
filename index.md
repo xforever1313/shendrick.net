@@ -9,8 +9,6 @@ comments: false
 
 My name is Seth!
 
-![me](/img/me.jpg "Me!")
-
  * I am a Computer Engineer.
  * I graduated from RIT with a B.S. in Computer Engineering in 2014.
  * I currently work at Harris Corporation as a Software Engineer, where I write Automated Tests.
