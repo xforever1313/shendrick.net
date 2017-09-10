@@ -93,7 +93,7 @@ owa_cmds.push(['trackDomStream']);
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <li>
-                        <a href="/index.html"><img src="/static/img/me.jpg" width="240" height="240" /></a>
+                        <a href="/index.html"><img class="image avatar" src="/static/img/me.jpg" width="240" height="240" /></a>
                     </li>
                     <li>
                         <a href="/index.html"><i class="fa fa-home"></i>Home</a>
@@ -108,7 +108,14 @@ owa_cmds.push(['trackDomStream']);
                                 ( @page.Id.Contains( ".well-known" ) == false ) // Don't include lets encrypt stuff.
                             )
                             {
-                                @:<li><a href="@page.Url">@page.Title</a></li>
+                                if( page.Bag.ContainsKey( "icon" ) )
+                                {
+                                    @:<li><a href="@page.Url"><i class="fa @page.Bag["icon"]"></i>@page.Title</a></li>
+                                }
+                                else
+                                {
+                                    @:<li><a href="@page.Url"><i class="fa fa-circle-o"></i>@page.Title</a></li>
+                                }
                             }
                         }
                     }
@@ -168,8 +175,18 @@ owa_cmds.push(['trackDomStream']);
 
     <!-- Footer -->
     <div id="footer-sec">
-        &copy; @DateTime.Now.Year <a href="https://shendrick.net">Seth Hendrick</a> | Design By : <a href="http://www.binarytheme.com/" target="_blank">BinaryTheme.com</a> |
-        <span>Page generated on @(DateTime.UtcNow.ToString( "R" ))</span> | Opinions are Mine
+        <div>
+            &copy; @DateTime.Now.Year <a href="https://shendrick.net">Seth Hendrick</a> | Design By : <a href="http://www.binarytheme.com/" target="_blank">BinaryTheme.com</a> |
+            <span>Page generated on @(DateTime.UtcNow.ToString( "R" ))</span> | Opinions are Mine
+        </div>
+        <div>
+            Posts on <a href="https://www.shendrick.net">shendrick.net</a> are licensed under a <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+        </div>
+        <div>
+            <a rel="license" href="https://creativecommons.org/licenses/by-sa/4.0/">
+                <img alt="Creative Commons License CC BY-SA 4.0" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />
+            </a>
+        </div>
     </div>
 
     <!-- SCRIPTS -AT THE BOTTOM TO REDUCE THE LOAD TIME-->
