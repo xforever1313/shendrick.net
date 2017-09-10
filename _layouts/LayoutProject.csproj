@@ -100,7 +100,6 @@
     <Content Include="tag.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\css\style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -114,9 +113,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="blog.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\_includes\head.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
