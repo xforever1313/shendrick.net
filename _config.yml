@@ -9,3 +9,11 @@ author: Seth Hendrick
 title: CE++
 url: https://www.shendrick.net
 contact: seth@shendrick.net
+
+disqus_shortname: shendrick-net
+
+exclude:
+ - .gitignore
+ - .git
+ - .vs
+ - .vscode
