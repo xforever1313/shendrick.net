@@ -8,12 +8,21 @@ tag_pages_layout: tag
 author: Seth Hendrick
 title: CE++
 url: https://www.shendrick.net
+urlnohttp: www.shendrick.net
 contact: seth@shendrick.net
+
+github: https://github.com/xforever1313/shendrick.net
+githubissues: https://github.com/xforever1313/shendrick.net/issues
 
 disqus_shortname: shendrick-net
 
 exclude:
  - .gitignore
  - .git
+ - .gitmodules
+ - .tgitconfig
  - .vs
  - .vscode
+ - build.cake
+ - tools
+ - Readme.md
