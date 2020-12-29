@@ -1,8 +1,9 @@
 ---
 layout: aboutpage
-title: About
+title: About Me
 description: "More about me and this site"
 comments: false
+icon: "fas fa-address-card"
 pageindex: 0
 ---
 
