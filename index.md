@@ -9,10 +9,9 @@ comments: false
 
 My name is Seth!
 
- * I am a Computer Engineer.
  * I graduated from RIT with a B.S. in Computer Engineering in 2014.
- * I currently work at Harris Corporation as a Software Engineer, where I write Automated Tests.
- * My favorite programming languages are C#, C++, and Python.
+ * I currently work at L3Harris Technologies in Rochester, NY as a Software Engineer, where I write Automated Tests.
+ * My favorite programming language is C#.
  * My favorite color is green.
 
 You can find more of me on the internet by clicking on the links on the sidebar.
