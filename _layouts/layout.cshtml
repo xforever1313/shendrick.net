@@ -82,9 +82,15 @@
                     </li>
                     @{
                         List<string> ignorePages = new List<string>() { "/", "/posts" };
+                        List<Page> aboutPages = new List<Page>();
+                        List<Page> otherPages = new List<Page>();
                         foreach( Page thePage in Model.Site.Pages )
                         {
-                            if(
+                            if( thePage.Bag.ContainsKey( "layout" ) && "aboutpage".Equals( thePage.Bag["layout"] ) )
+                            {
+                                aboutPages.Add( thePage );
+                            }
+                            else if(
                                 ( ignorePages.Contains( @thePage.Id ) == false ) &&
                                 ( string.IsNullOrEmpty( @thePage.Id ) == false ) &&
                                 ( @thePage.Id.Contains( ".well-known" ) == false ) && // Don't include lets encrypt stuff.
@@ -92,6 +98,34 @@
                                 // Don't include page if we explicitly exclude it from the nav bar.
                                 ( ( @thePage.Bag.ContainsKey( "exclude_from_navbar" ) && ( "True".Equals( @thePage.Bag["exclude_from_navbar"].ToString(), StringComparison.InvariantCultureIgnoreCase ) ) ) == false )
                             )
+                            {
+                                otherPages.Add( thePage );
+                            }
+                        }
+
+                        int Compare( Page left, Page right )
+                        {
+                            const string key = "pageindex";
+                            if( left.Bag.ContainsKey( key ) == false )
+                            {
+                                throw new KeyNotFoundException(
+                                    left.Id + " needs " + key
+                                );
+                            }
+                            else if ( right.Bag.ContainsKey(key) == false )
+                            {
+                                throw new KeyNotFoundException(
+                                    right.Id + " needs " + key
+                                );
+                            }
+                            return left.Bag[key].ToString().CompareTo( right.Bag[key].ToString() );
+                        }
+                        aboutPages.Sort( Compare );
+                    }
+                    <li>
+                        <a href="#"><i class="fa fa-question-circle"></i>About<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            @foreach( var thePage in aboutPages )
                             {
                                 if( thePage.Bag.ContainsKey( "icon" ) )
                                 {
@@ -102,8 +136,8 @@
                                     @:<li><a href="@thePage.Url"><i class="fa fa-circle-o"></i>@thePage.Title</a></li>
                                 }
                             }
-                        }
-                    }
+                        </ul>
+                    </li>
                     <li>
                         <a href="/posts.html"><i class="fa fa-file-text"></i>Posts<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
@@ -124,7 +158,17 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/atom.xml"><i class="fa fa-rss"></i>ATOM Feed</a>
+                        @foreach( var thePage in otherPages )
+                        {
+                            if( thePage.Bag.ContainsKey( "icon" ) )
+                            {
+                                @:<li><a href="@thePage.Url"><i class="fa @thePage.Bag["icon"]"></i>@thePage.Title</a></li>
+                            }
+                            else
+                            {
+                                @:<li><a href="@thePage.Url"><i class="fa fa-circle-o"></i>@thePage.Title</a></li>
+                            }
+                        }
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-users"></i>Follow Me!<span class="fa arrow"></span></a>
@@ -146,6 +190,12 @@
                             </li>
                             <li>
                                 <a href="https://www.strava.com/athletes/14128419"><i class="fa fa-map-signs" aria-hidden="true"></i>Strava</a>
+                            </li>
+                            <li>
+                                <a href="/atom.xml"><i class="fa fa-rss"></i>ATOM Feed</a>
+                            </li>
+                            <li>
+                                <a href="/rss.xml"><i class="fa fa-rss"></i>RSS Feed</a>
                             </li>
                         </ul>
                     </li>
