@@ -88,7 +88,9 @@
                                 ( ignorePages.Contains( @thePage.Id ) == false ) &&
                                 ( string.IsNullOrEmpty( @thePage.Id ) == false ) &&
                                 ( @thePage.Id.Contains( ".well-known" ) == false ) && // Don't include lets encrypt stuff.
-                                ( "nil".Equals( thePage.Bag["layout"] ) == false )
+                                ( "nil".Equals( thePage.Bag["layout"] ) == false ) &&
+                                // Don't include page if we explicitly exclude it from the nav bar.
+                                ( ( @thePage.Bag.ContainsKey( "exclude_from_navbar" ) && ( "True".Equals( @thePage.Bag["exclude_from_navbar"].ToString(), StringComparison.InvariantCultureIgnoreCase ) ) ) == false )
                             )
                             {
                                 if( thePage.Bag.ContainsKey( "icon" ) )
