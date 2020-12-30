@@ -157,19 +157,17 @@
                             }
                         </ul>
                     </li>
-                    <li>
-                        @foreach( var thePage in otherPages )
+                    @foreach( var thePage in otherPages )
+                    {
+                        if( thePage.Bag.ContainsKey( "icon" ) )
                         {
-                            if( thePage.Bag.ContainsKey( "icon" ) )
-                            {
-                                @:<li><a href="@thePage.Url"><i class="fa @thePage.Bag["icon"]"></i>@thePage.Title</a></li>
-                            }
-                            else
-                            {
-                                @:<li><a href="@thePage.Url"><i class="fa fa-circle-o"></i>@thePage.Title</a></li>
-                            }
+                            @:<li><a href="@thePage.Url"><i class="fa @thePage.Bag["icon"]"></i>@thePage.Title</a></li>
                         }
-                    </li>
+                        else
+                        {
+                            @:<li><a href="@thePage.Url"><i class="fa fa-circle-o"></i>@thePage.Title</a></li>
+                        }
+                    }
                     <li>
                         <a href="#"><i class="fa fa-users"></i>Follow Me!<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
