@@ -9,7 +9,7 @@ tags: [deck, gaming, linux, putty, ssh, sshd, steam, systemd]
 code: true
 ---
 
-I recently got a [Steam Deck](https://www.steamdeck.com/), the new handheld gaming system from Valve.  So far, it has impressed me.  However, I have a bunch of game installation DVDs, but the Steam Deck lacks a DVD drive, so I needed to figure out a way to get the DVD contents so I could install a game.  One way to get the DVD files onto the Steam Deck so I could install games is by copying the files from my computer with a DVD drive to the Steam Deck via SSH.  However, I noticed that the Steam Deck does not turn on SSH Server (SSHD) by default, meaning I could not connect to it remotely.
+I recently got a [Steam Deck](https://www.steamdeck.com/), the new handheld gaming system from Valve.  So far, it has impressed me.  However, I have a bunch of game installation DVDs, but the Steam Deck lacks a DVD drive.  I needed to figure out a way to get the DVD contents onto the Steam Deck so I could install a game.  One way to get the DVD files onto the Steam Deck is by copying the files from my computer with a DVD drive to the Steam Deck via SSH.  However, I noticed that the Steam Deck does not turn on SSH Server (SSHD) by default, meaning I could not connect to it remotely.
 
 [SSH](https://en.wikipedia.org/wiki/Secure_Shell) stands for Secure Shell Protocol.  It allows one to securely remote into their computers from a different computer.  With SSH, one can send commands, or even copy files, between 2 computers.  [OpenSSH](https://en.wikipedia.org/wiki/OpenSSH) is a common SSH implementation that is installed on the Steam Deck by default.  However, while the Steam Deck is able to connect to other computers via SSH, it does not allow other computers to connect to it via SSH.  This is because the SSH Daemon (SSHD), or SSH Server is disabled by default.  From a security perspective, this makes sense.  The average user of the Steam Deck is probably never going to remote into it via SSH, so Valve most likely decided to disable it by default so any unfriendly hackers don't try to brute force their way into your Steam Deck and cause problems.
 
@@ -21,7 +21,7 @@ This article will explain how to enable SSHD on your Steam Deck, while also doin
 
 The first thing you need to do after booting up the Steam Deck is to enter the Desktop.  To do this, hit the "Steam" button on the Steam Deck, and scroll down through the menu until you hit the "Power" setting.  Then, select the "Switch to Desktop" option.
 
-One the desktop is brought up, click on the Steam Deck logo in the lower-left corner to bring up what is essentially the Steam Deck's equivalent of the Windows "Start" menu.  On the left column, select the "System" option, and then select "Konsole" on the right column.  You can also type in "Konsole" in the search bar.
+One the desktop is brought up, click on the Steam Deck logo in the lower-left corner of the desktop to bring up what is essentially the Steam Deck's equivalent of the Windows "Start" menu.  On the left column, select the "System" option, and then select "Konsole" on the right column.  You can also type in "Konsole" in the search bar.
 
 A terminal will appear.  I know, a terminal can be intimidating to anyone who has never used one before.  But there's only a handful of commands you need to send to enable SSH.  Once the terminal appears, either plug in a Keyboard or hit the "Steam" button + X to bring up the virtual keyboard, and we're ready to start.
 
@@ -49,13 +49,13 @@ Retype New Password:
 
 Once you have your password set, you need to send one or two commands to enable SSHD, depending on what your goal is.
 
-To enable SSHD, and allow incoming SSH connections, type the following command (you also may need to provide your password due to running the command with sudo):
+To enable SSHD, and allow incoming SSH connections, type the following command (you also may get a prompt asking for your password due to running the command with sudo):
 
 ```txt
 sudo systemctl start sshd
 ```
 
-"[sudo](https://en.wikipedia.org/wiki/Sudo)" is a command in Linux that basically says "run the following command as a different user".  By default, it will run the command as the "root" user.  This is pretty much the equivalent of running a command as an administrator in Windows.  "systemctl" talks to software known as [systemd](https://en.wikipedia.org/wiki/Systemd).  Systemd does a lot of things that I won't go into in this article, but in this case, it is controlling a service or daemon.  "start" starts the service, and "sshd" is the name of the service to start.
+"[sudo](https://en.wikipedia.org/wiki/Sudo)" is a command in Linux that basically says "run the following command as a different user".  By default, it will run the command as the "root" user.  This is pretty much the equivalent of running a command as an administrator in Windows.  "systemctl" talks to software known as [systemd](https://en.wikipedia.org/wiki/Systemd).  Systemd does a lot of things that I won't go into detail here, but in this case, it is controlling a service or daemon.  "start" starts the service, and "sshd" is the name of the service to start.
 
 To stop the SSHD service, the command becomes:
 
@@ -69,7 +69,7 @@ However, starting the service will only have the service run until the system is
 sudo systemctl enable sshd
 ```
 
-One quick thing to mention, "enable" does not start the service.  If you want to both enable and start the service, you'll have to send both commands.  Meanwhile, if you no longer require SSHD to start on startup, simply disable it:
+One quick thing to mention, "enable" does not start the service.  If you want to both enable and start the service, you'll have to send both the start and enable.  Meanwhile, if you no longer require SSHD to start on startup, simply disable it:
 
 ```txt
 sudo systemctl disable sshd
@@ -138,7 +138,7 @@ sudo apt install openssh-client
 sudo pacman -S openssh
 ```
 
-PuTTY is also available for Linux as well.  You can install it from your package manager:
+PuTTY is also available for Linux as well.  You can install it from your package manager if you prefer PuTTY over OpenSSH:
 
 ```sh
 # Ubuntu / Debian
@@ -154,7 +154,7 @@ Now that you have an SSH client installed, you can try connecting to the Steam D
 
 ### PuTTY
 
-To connect via PuTTY, go ahead and start PuTTY.  A window will appear.  You'll want to select the "SSH" radio button, if its not already selected.  In the "Host Name (or IP address)" text box, you'll want to put in "deck@steamdeck".  This tells PuTTY to login as the "deck" user to the device on the network named "steamdeck".  If you changed hostnames, replace "steamdeck" with your hostname.  If you changed your default SSH port (more on that later), you'll have to replace 22 in the port text box with that.  Then click "Open".
+To connect via PuTTY, go ahead and start PuTTY.  A window will appear.  You'll want to select the "SSH" radio button, if its not already selected.  In the "Host Name (or IP address)" text box, you'll want to put in "deck@steamdeck".  This tells PuTTY to login as the "deck" user to the device on the network labeled "steamdeck".  If you changed hostnames, replace "steamdeck" with your hostname.  If you changed your default SSH port (more on that later), you'll have to replace 22 in the port text box with that.  Then click "Open".
 
 [[!Putty Setup]](/static/img/steamdeck/steamdeckputty.png)](/static/img/steamdeck/steamdeckputty.png)
 
@@ -182,7 +182,7 @@ ssh deck@steamdeck -p 1000
 
 ## Securing your Steam Deck
 
-Being able to SSH into your Steam Deck can be connivent for a variety of reasons, but it does come at a risk that someone could brute force their way into your Steam Deck and cause havoc.  If you'll never connect to a public or untrusted network, you probably do not have to worry about any of this.  However, if you do plan on doing so, you should consider securing your SSH connection so bad actors can't get into your Steam Deck.
+Being able to SSH into your Steam Deck can be connivent for a variety of reasons, but it does come at a risk that someone could brute force their way into your Steam Deck and cause havoc.  If you'll never connect to a public or untrusted network, you probably do not have to worry about any of this.  However, if you do plan on doing so, you should consider securing your SSH server so bad actors can't get into your Steam Deck.
 
 The most secure way to ensure someone can't SSH into your Steam Deck is to turn off SSHD when you're not using it.  However, for those who want to keep SSHD running at all times, here are some tips you can use to prevent unauthorized access to your Steam Deck.
 
@@ -196,7 +196,7 @@ You'll need to open a terminal on your Steam Deck, either by SSHing into it with
 sudo nano /etc/ssh/sshd_config
 ```
 
-"nano" is a text editor built into the terminal.  Vim, Emacs, are also popular choices, but nano is probably the easiest to use.  /etc/ssh/sshd_config is a file that is the SSH Daemon configuration.  Towards the top, you should see something like this:
+"nano" is a text editor built into the terminal.  Vim and Emacs are also popular choices, but nano is probably the easiest to use.  /etc/ssh/sshd_config is a file that is the SSH Daemon configuration.  Towards the top, you should see something like this:
 
 ```sh
 #Port 22
@@ -270,7 +270,7 @@ sudo systemctl restart sshd
 
 ### Using Key-based Login
 
-The most effective way to ensure no one can get into your Steam Deck via SSH is to disable password-based login.  This means that a hacker can't brute force their way into your system by guessing passwords.  Rather, the way into the Steam Deck via SSH is with a key.  While a strong password gives a lot of protection, brute forcing a key is pretty much impossible, and is convient since you no longer need to specify a password.
+The most effective way to ensure no one can get into your Steam Deck via SSH is to disable password-based login.  This means that a hacker can't brute force their way into your system by guessing passwords.  Rather, the way into the Steam Deck via SSH is with a key.  While a strong password gives a lot of protection, brute forcing a key is pretty much impossible, and is connivent since you no longer need to specify a password.
 
 An SSH Key is composed of two parts, a private key and a public key.  The private key stays on your SSH client and should never, ever, be given out to anyone.  A public key, meanwhile, gets added to SSH Servers saying "the user who has this key is allowed in".  For more information about "Public-key Cryptography" see [this Wikipedia article](https://en.wikipedia.org/wiki/Public-key_cryptography).
 
@@ -281,6 +281,8 @@ The first step to using SSH keys is to generate one.  Each client does their own
 ##### PuTTY
 
 When PuTTY is installed, it installs a tool called PuTTYGen (PuTTY Key Generator).  Launch this tool (if on Windows, hit Start and type "PuTTYGen").  On the Window that appears, ensure RSA is selected at the bottom (should be RSA by default), and then hit the "Generate" button.  PuTTY Gen will ask you to move your mouse over the blank area to "generate randomness".  Once that's done, you should see a window like below.  For the "Key comment", I usually put my computer's login name @ the hostname.  So, me@mycomputer.
+
+If you trust that your device will only ever be used by you, you probably do not need to enter a passphrase here.  The only thing a passphrase does is make it so if someone gains access to your PC and copies your private key, they won't be able to use it.  If there is no passphrase, and someone steals your private key, then they'll be able to use it.  If this is a concern, add a passphrase, otherwise leave it blank.
 
 [[!PuTTYGen]](/static/img/steamdeck/puttygen.png)](/static/img/steamdeck/puttygen.png)
 
@@ -296,7 +298,7 @@ If you're using OpenSSH, generating an SSH Key is a bit more straightforward.  O
 ssh-keygen
 ```
 
-You'll then be prompted on where to save the public and private key.  By default, the generated private keys will be saved to C:\\Users\\You\\.ssh\\id_rsa on Windows, or /home/you/.ssh/id_rsa on Linux.  The public keys, meanwhile, will be place in C:\\Users\\You\\.ssh\\id_rsa.pub on Windows, or /home/you/.ssh/id_rsa.pub on Linux by default.  If these default values are fine with you, just hit enter at these prompts without entering anything.  When it asks you for a passphrase for your key, you can also leave that blank if you want.  If you trust that your device will only ever be used by you, you probably do not need to enter a passphrase here.  The only thing a passphrase does is make it so if someone gains access to your PC and copies your private key, they won't be able to use it.  If there is no passphrase, and someone steals your private key, then they'll be able to use it.
+You'll then be prompted on where to save the public and private key.  By default, the generated private keys will be saved to C:\\Users\\You\\.ssh\\id_rsa on Windows, or /home/you/.ssh/id_rsa on Linux.  The public keys, meanwhile, will be saved to C:\\Users\\You\\.ssh\\id_rsa.pub on Windows, or /home/you/.ssh/id_rsa.pub on Linux by default.  If these default values are fine with you, just hit enter at these prompts without entering anything.  When it asks you for a passphrase for your key, you can also leave that blank if you want.  If you trust that your device will only ever be used by you, you probably do not need to enter a passphrase here.  The only thing a passphrase does is make it so if someone gains access to your PC and copies your private key, they won't be able to use it.  If there is no passphrase, and someone steals your private key, then they'll be able to use it.  If this is a concern, add a passphrase, otherwise leave it blank.
 
 After creating your private/public key, send the following command to get the contents of your public key:
 
@@ -307,6 +309,8 @@ cat c:\\Users\\You\\.ssh\\id_rsa.pub
 # Linux
 cat /home/you/.ssh/id_rsa.pub
 ```
+
+"[cat](https://en.wikipedia.org/wiki/Cat_(Unix))" stands for "concatenate".  While it can be used to stitch multiple files together, it can also be used to dump the contents of a file to the terminal.
 
 Copy the output, we'll have to paste it in later.
 
@@ -320,17 +324,17 @@ mkdir -p .ssh
 nano .ssh/authorized_keys
 ```
 
-"cd" stands for "Change Directory".  Sending "cd" by itself brings you to your home directory.  "mkdir" stands for "Make Directory", and the "-p" argument stands for "don't error if the directory already exists", and ".ssh" is the directory to create.  This command says "create a .ssh folder in my home directory if one doesn't already exist".  nano is a text editor, and it opens an authorized_keys file.
+"cd" stands for "Change Directory".  Sending "cd" by itself brings you to your home directory.  "mkdir" stands for "Make Directory", and the "-p" argument stands for "don't error if the directory already exists".  .ssh" is the directory to create.  This command says "create a .ssh folder in my home directory if one doesn't already exist".  nano is a text editor, and it opens an authorized_keys file.
 
-The authorized_keys file contains one public key per line.  The only thing you need to do is paste in your public key that you copied in the last step.  If in PuTTY, you just need to right click to paste.  If in OpenSSH, it depends on your terminal on how to paste.  Once your key is pasted in, hit CTRL+O to write the file, and then CTRL+X to exit nano.  If you want to add more public keys, simply paste it onto a new line.  If you want to revoke a key, delete the entire line.
+The authorized_keys file contains one public key per line.  The only thing you need to do is paste in your public key that you copied in the last step.  If in PuTTY, you just need to right click to paste.  If in OpenSSH, it depends on your terminal on how to paste.  Once your key is pasted in, hit CTRL+O to write the file, and then CTRL+X to exit nano.  If you want to add more public keys, simply paste it onto a new line.  If you want to revoke a key later, delete the entire line.
 
 #### Connecting with an SSH Key
 
-The second-to-last thing to do is make sure you are actually able to login via your SSH Key instead of a password.
+Before disabling password-based login, we should make sure you are actually able to login via your SSH Key instead of a password.
 
 ##### PuTTY
 
-With PuTTY, setup everything the way you normally would, but there's one additional step.  On the left-most column, expand the tree, and click on Connection -> SSH -> Auth.  There, you'll see a "Private key file used for authentication" text box.  Hit "Browse" and select the private key (.ppk) file you generated earlier.  You can optionally hit the "Session" at the top of the tree on the left and save your settings.
+With PuTTY, setup everything the way you normally would, but there's one additional step.  On the left-most column, expand the tree, and click on Connection -> SSH -> Auth.  There, you'll see a "Private key file used for authentication" text box.  Hit "Browse" and select the private key (.ppk) file you generated earlier.  You can optionally hit the "Session" at the top of the tree on the left and save your settings for next time.
 
 [[!Putty Private Key]](/static/img/steamdeck/puttykey.png)](/static/img/steamdeck/puttykey.png)
 
