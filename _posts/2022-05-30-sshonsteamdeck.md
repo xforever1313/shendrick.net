@@ -15,7 +15,7 @@ I recently got a [Steam Deck](https://www.steamdeck.com/), the new handheld gami
 
 This article will explain how to enable SSHD on your Steam Deck, while also doing it securely.  There are multiple ways to go about doing this; this is simply the way I find easiest for me.
 
-## Enabling SSHD on the Stem Deck
+## Enabling SSHD on the Steam Deck
 
 ### Enter the Desktop
 
@@ -29,8 +29,8 @@ A terminal will appear.  I know, a terminal can be intimidating to anyone who ha
 
 The terminal should look something like this:
 
-```txt
-(deck@steamdeck ~) $
+```plaintext
+(deck@@steamdeck ~) $
 ```
 
 "deck" is the username.  The Steam Deck has a default user whose name is "deck".  "steamdeck" is your hostname.  The hostname you can change (more on that later).  If you already changed your hostname, then this may be different.
@@ -39,8 +39,8 @@ The first thing you need to do is set a password for the "deck" user.  By defaul
 
 However, we need to run commands as root to enable SSH, so we need a password.  To do this, type in the "passwd" command and press enter.  It will then ask you for a new password.  Then, retype in the same password to confirm.  Note, while typing your password, you won't see the characters you are typing show up in the terminal.
 
-```txt
-(deck@steamdeck ~) $ passwd
+```plaintext
+(deck@@steamdeck ~) $ passwd
 New Password:
 Retype New Password:
 ```
@@ -51,7 +51,7 @@ Once you have your password set, you need to send one or two commands to enable 
 
 To enable SSHD, and allow incoming SSH connections, type the following command (you also may get a prompt asking for your password due to running the command with sudo):
 
-```txt
+```plaintext
 sudo systemctl start sshd
 ```
 
@@ -59,19 +59,19 @@ sudo systemctl start sshd
 
 To stop the SSHD service, the command becomes:
 
-```txt
+```plaintext
 sudo systemctl stop sshd
 ```
 
 However, starting the service will only have the service run until the system is rebooted.  Now, maybe this is what you want, in which case, you're done.  However, if you want SSHD to startup each time the Steam Deck boots, you need to tell systemd to enable the service, and that command is:
 
-```txt
+```plaintext
 sudo systemctl enable sshd
 ```
 
 One quick thing to mention, "enable" does not start the service.  If you want to both enable and start the service, you'll have to send both the start and enable.  Meanwhile, if you no longer require SSHD to start on startup, simply disable it:
 
-```txt
+```plaintext
 sudo systemctl disable sshd
 ```
 
@@ -104,11 +104,11 @@ However, if you have a modern version of Windows 10, consider, instead, installi
 
 To verify OpenSSH was installed successfully, hit Start and type "PowerShell" and hit enter.  A terminal will show up.  Type "ssh" and hit enter in the terminal, and you should see a usage print out that looks like this:
 
-```txt
+```plaintext
 usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
            [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]
            [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]
-           [-i identity_file] [-J [user@]host[:port]] [-L address]
+           [-i identity_file] [-J [user@@]host[:port]] [-L address]
            [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-p port]
            [-Q query_option] [-R address] [-S ctl_path] [-W host:port]
            [-w local_tun[:remote_tun]] destination [command]
@@ -118,11 +118,11 @@ usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
 
 Most Linux distributions come with an SSH client installed by default (usually OpenSSH).  To see if its already installed, open a terminal and send "ssh", and you should see the usage output:
 
-```txt
+```plaintext
 usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
            [-b bind_address] [-c cipher_spec] [-D [bind_address:]port]
            [-E log_file] [-e escape_char] [-F configfile] [-I pkcs11]
-           [-i identity_file] [-J [user@]host[:port]] [-L address]
+           [-i identity_file] [-J [user@@]host[:port]] [-L address]
            [-l login_name] [-m mac_spec] [-O ctl_cmd] [-o option] [-p port]
            [-Q query_option] [-R address] [-S ctl_path] [-W host:port]
            [-w local_tun[:remote_tun]] destination [command]
@@ -130,7 +130,7 @@ usage: ssh [-46AaCfGgKkMNnqsTtVvXxYy] [-B bind_interface]
 
 If you do not have SSH installed, you can install it via your package manager:
 
-```sh
+```bash
 # Ubuntu / Debian
 sudo apt install openssh-client
 
@@ -140,7 +140,7 @@ sudo pacman -S openssh
 
 PuTTY is also available for Linux as well.  You can install it from your package manager if you prefer PuTTY over OpenSSH:
 
-```sh
+```bash
 # Ubuntu / Debian
 sudo apt install putty
 
@@ -154,14 +154,14 @@ Now that you have an SSH client installed, you can try connecting to the Steam D
 
 ### PuTTY
 
-To connect via PuTTY, go ahead and start PuTTY.  A window will appear.  You'll want to select the "SSH" radio button, if its not already selected.  In the "Host Name (or IP address)" text box, you'll want to put in "deck@steamdeck".  This tells PuTTY to login as the "deck" user to the device on the network labeled "steamdeck".  If you changed hostnames, replace "steamdeck" with your hostname.  If you changed your default SSH port (more on that later), you'll have to replace 22 in the port text box with that.  Then click "Open".
+To connect via PuTTY, go ahead and start PuTTY.  A window will appear.  You'll want to select the "SSH" radio button, if its not already selected.  In the "Host Name (or IP address)" text box, you'll want to put in "deck@@steamdeck".  This tells PuTTY to login as the "deck" user to the device on the network labeled "steamdeck".  If you changed hostnames, replace "steamdeck" with your hostname.  If you changed your default SSH port (more on that later), you'll have to replace 22 in the port text box with that.  Then click "Open".
 
-[[!Putty Setup]](/static/img/steamdeck/steamdeckputty.png)](/static/img/steamdeck/steamdeckputty.png)
+[![Putty Setup](/static/img/steamdeck/steamdeckputty.png)](/static/img/steamdeck/steamdeckputty.png)
 
 A black Window should appear with a terminal that looks like:
 
-```txt
-(deck@steamdeck ~) $
+```plaintext
+(deck@@steamdeck ~) $
 ```
 
 If you see that, congratulations!  You can now SSH into your Steam Deck!
@@ -170,14 +170,14 @@ If you see that, congratulations!  You can now SSH into your Steam Deck!
 
 If connecting via OpenSSH, open PowerShell if on Windows, or your favorite terminal if on Linux.  Then, simply send the command:
 
-```sh
-ssh deck@steamdeck
+```bash
+ssh deck@@steamdeck
 ```
 
 If you changed hostnames, replace "steamdeck" with your hostname.  If you changed your default SSH port (more on that later), you'll have to add an additional argument (the example below has the port changed to port 1000):
 
-```sh
-ssh deck@steamdeck -p 1000
+```bash
+ssh deck@@steamdeck -p 1000
 ```
 
 ## Securing your Steam Deck
@@ -192,13 +192,13 @@ Changing the default port SSHD listens for connections on (port 22) can help pre
 
 You'll need to open a terminal on your Steam Deck, either by SSHing into it with another PC, or by doing it on the deck itself.  If doing it on the deck itself, consider grabbing an external keyboard, since the built-in on-screen keyboard does not have a CTRL button.  Then run the command:
 
-```sh
+```bash
 sudo nano /etc/ssh/sshd_config
 ```
 
 "nano" is a text editor built into the terminal.  Vim and Emacs are also popular choices, but nano is probably the easiest to use.  /etc/ssh/sshd_config is a file that is the SSH Daemon configuration.  Towards the top, you should see something like this:
 
-```sh
+```bash
 #Port 22
 #AddressFamily any
 #ListenAddress 0.0.0.0
@@ -207,7 +207,7 @@ sudo nano /etc/ssh/sshd_config
 
 The '#' characters represent comments, which means the lines are ignored.  If you want to change your port to, say, port 9001, you'll have to edit the config file so it looks something like this:
 
-```sh
+```bash
 Port 9001
 #AddressFamily any
 #ListenAddress 0.0.0.0
@@ -216,15 +216,15 @@ Port 9001
 
 Deleting the '#' character tells SSHD to no longer ignore the line, and the next time it starts, listen for incoming SSH connections on port 9001.  This means that when connecting to the Steam Deck from your other computer, you need to specify the port:
 
-```sh
-ssh deck@steamdeck -p 9001
+```bash
+ssh deck@@steamdeck -p 9001
 ```
 
 To save the configuration hit CTRL+O (Write Out), and then hit CTRL+X to exit.
 
 Changes to SSHD are not applied until the process is restart.  To do that, run the following command on the Steam Deck:
 
-```sh
+```bash
 sudo systemctl restart sshd
 ```
 
@@ -234,13 +234,13 @@ The "root" user on Linux is all-knowing.  It has access to everything on the sys
 
 By default, SSHD does not allow someone to login as the root user via SSH with a password.  You can confirm this by checking the SSHD config by running the following command on the Steam Deck:
 
-```sh
+```bash
 sudo nano /etc/ssh/sshd_config
 ```
 
 Arrow down, and you should see something like this:
 
-```sh
+```bash
 # Authentication:
 
 #LoginGraceTime 2m
@@ -252,7 +252,7 @@ Arrow down, and you should see something like this:
 
 If you see this, it means the only way someone to login as root is via an SSH key (more on that later).  If you want to make it so no one can login as root _period_, change the setting to look like this:
 
-```sh
+```bash
 # Authentication:
 
 #LoginGraceTime 2m
@@ -264,7 +264,7 @@ PermitRootLogin no
 
 Remove the '#' in front of PermitRootLogin tells SSHD to no longer ignore that setting, and the "no" says "never allow anyone to login directly as root via SSH".  Hit CTRL+O to save the config, and CTRL+X to exit nano.  Then, restart the SSHD service by sending the following command:
 
-```sh
+```bash
 sudo systemctl restart sshd
 ```
 
@@ -280,11 +280,11 @@ The first step to using SSH keys is to generate one.  Each client does their own
 
 ##### PuTTY
 
-When PuTTY is installed, it installs a tool called PuTTYGen (PuTTY Key Generator).  Launch this tool (if on Windows, hit Start and type "PuTTYGen").  On the Window that appears, ensure RSA is selected at the bottom (should be RSA by default), and then hit the "Generate" button.  PuTTY Gen will ask you to move your mouse over the blank area to "generate randomness".  Once that's done, you should see a window like below.  For the "Key comment", I usually put my computer's login name @ the hostname.  So, me@mycomputer.
+When PuTTY is installed, it installs a tool called PuTTYGen (PuTTY Key Generator).  Launch this tool (if on Windows, hit Start and type "PuTTYGen").  On the Window that appears, ensure RSA is selected at the bottom (should be RSA by default), and then hit the "Generate" button.  PuTTY Gen will ask you to move your mouse over the blank area to "generate randomness".  Once that's done, you should see a window like below.  For the "Key comment", I usually put my computer's login name @@ the hostname.  So, me@@mycomputer.
 
 If you trust that your device will only ever be used by you, you probably do not need to enter a passphrase here.  The only thing a passphrase does is make it so if someone gains access to your PC and copies your private key, they won't be able to use it.  If there is no passphrase, and someone steals your private key, then they'll be able to use it.  If this is a concern, add a passphrase, otherwise leave it blank.
 
-[[!PuTTYGen]](/static/img/steamdeck/puttygen.png)](/static/img/steamdeck/puttygen.png)
+[![PuTTYGen](/static/img/steamdeck/puttygen.png)](/static/img/steamdeck/puttygen.png)
 
 Go ahead and hit "Save private key" and save the .ppk file somewhere safe.  I usually put it in C:\\Users\\Me\\.ssh\\key.ppk on Windows, but you can put it wherever you want, assuming its a spot only you have access to.  You can also optionally hit "Save public key" and save that somewhere as well.  I usually put it in C:\\Users\\Me\\.ssh\\key.pub on Windows.
 
@@ -294,7 +294,7 @@ Before you close out of PuTTYGen, copy the entire contents of the text box that 
 
 If you're using OpenSSH, generating an SSH Key is a bit more straightforward.  Open PowerShell on Windows or your favorite terminal on Linux, and run the following command:
 
-```sh
+```bash
 ssh-keygen
 ```
 
@@ -302,7 +302,7 @@ You'll then be prompted on where to save the public and private key.  By default
 
 After creating your private/public key, send the following command to get the contents of your public key:
 
-```sh
+```bash
 # Windows Powershell
 cat c:\\Users\\You\\.ssh\\id_rsa.pub
 
@@ -318,7 +318,7 @@ Copy the output, we'll have to paste it in later.
 
 Once you have your public key copied to your clipboard, SSH into your Steam Deck.  Then, run the following commands in the SSH terminal:
 
-```sh
+```bash
 cd
 mkdir -p .ssh
 nano .ssh/authorized_keys
@@ -336,7 +336,7 @@ Before disabling password-based login, we should make sure you are actually able
 
 With PuTTY, setup everything the way you normally would, but there's one additional step.  On the left-most column, expand the tree, and click on Connection -> SSH -> Auth.  There, you'll see a "Private key file used for authentication" text box.  Hit "Browse" and select the private key (.ppk) file you generated earlier.  You can optionally hit the "Session" at the top of the tree on the left and save your settings for next time.
 
-[[!Putty Private Key]](/static/img/steamdeck/puttykey.png)](/static/img/steamdeck/puttykey.png)
+[![Putty Private Key](/static/img/steamdeck/puttykey.png)](/static/img/steamdeck/puttykey.png)
 
 Hit "Open", and it PuTTY does not ask you for a password, you successfully logged in via an SSH Key!
 
@@ -344,14 +344,14 @@ Hit "Open", and it PuTTY does not ask you for a password, you successfully logge
 
 For OpenSSH, its actually pretty easy to do.  If you saved your private key to the default location, you just need to send the usual SSH command:
 
-```sh
-ssh deck@steamdeck
+```bash
+ssh deck@@steamdeck
 ```
 
 If you saved the private key somewhere else, you'll have to specify that via the -i argument (i standing for "identity_file"):
 
-```sh
-ssh -i /path/to/private/key deck@steamdeck
+```bash
+ssh -i /path/to/private/key deck@@steamdeck
 ```
 
 If SSH does not prompt you to enter a password, you logged in via a key!  If not, double check your authorized_keys file on your deck, and make sure the key got pasted in correctly.
@@ -362,13 +362,13 @@ The last thing to do is to actually disable password login if you want.  It is i
 
 Open the SSHD config with the following command:
 
-```sh
+```bash
 sudo nano /etc/ssh/sshd_config
 ```
 
 Arrow down and you should see something that looks like:
 
-```sh
+```bash
 # To disable tunneled clear text passwords, change to no here!
 #PasswordAuthentication yes
 #PermitEmptyPasswords no
@@ -376,7 +376,7 @@ Arrow down and you should see something that looks like:
 
 By default, password authentication is enabled.  To disable it, Remove the '#' in front of "PasswordAuthentication" to tell SSHD to no longer ignore this setting, and set "yes" to "no".  It should look something like:
 
-```sh
+```bash
 # To disable tunneled clear text passwords, change to no here!
 PasswordAuthentication no
 #PermitEmptyPasswords no
@@ -384,7 +384,7 @@ PasswordAuthentication no
 
 Hit CTRL+O to save the settings, and then CTRL+X to exit.  Then restart the SSH service by running:
 
-```sh
+```bash
 sudo systemctl restart sshd
 ```
 
