@@ -52,22 +52,28 @@ layout: layout
             @Raw( Model.Content )
         </div>
     </div>
+    <hr/>
     <div class="row">
         <div class="col-md-12">
-            <nav id="posts-nav" class="paged-navigation contain">
-                <div class="nav-older">
+            <em>Like what you see?  Consider <a href="/about/donate.html">donating</a> to keep the server running.</em>
+        </div>
+    </div>
+    <hr/>
+    <div class="row">
+        <div class="col-md-12">
+            <nav id="posts-nav" style="display: flex; justify-content: space-around;">
+                <div>
                     @if( Model.Previous != null )
                     {
                         <a href="@Model.Previous.Url" title="Previous Post: @Model.Previous.Title">&larr; @Model.Previous.Title</a>
                     }
                 </div>
-                <div class="nav-newer">
+                <div>
                     @if( Model.Next != null )
                     {
                         <a href="@Model.Next.Url" title="next Post: @Model.Next.Title">@Model.Next.Title &rarr; </a>
                     }
                 </div>
-                <div class="clear">&nbsp;</div>
             </nav>
         </div>
     </div>
@@ -76,6 +82,7 @@ layout: layout
     {
         <div class="row">
             <div class="col-md-12">
+                <h2>Comments</h2>
                 <div id="disqus_thread"></div>
                 <script>
 
