@@ -3,7 +3,7 @@ layout: page
 title: Projects
 description: "Seth Hendrick's Projects"
 comments: false
-icon: "fa-file-code-o"
+icon: "fa-regular fa-file-code"
 pageindex: 0
 ---
 

@@ -11,24 +11,34 @@
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     @{
-        StringBuilder tagBuilder = new StringBuilder();
-        foreach( string tag in Model.Page.Tags )
+        if( Model.Page.Bag.ContainsKey( "tags" ) )
         {
-            tagBuilder.Append( tag + "," );
-        }
-        if( tagBuilder.Length > 0 )
-        {
-            tagBuilder = tagBuilder.Remove( tagBuilder.Length - 1, 1 );
-            @:
-            <meta name="keywords" content="@tagBuilder.ToString()" />
+            var tagBuilder = new StringBuilder();
+            var tags = Model.Page.Bag["tags"] as IEnumerable<string>;
+            foreach( string tag in tags ?? Array.Empty<string>() )
+            {
+                tagBuilder.Append( tag + "," );
+            }
+            if( tagBuilder.Length > 0 )
+            {
+                tagBuilder = tagBuilder.Remove( tagBuilder.Length - 1, 1 );
+                @:<meta name="keywords" content="@tagBuilder.ToString()" />
+            }
         }
 
         if( Model.Page.Bag.ContainsKey( "description" ) )
         {
-            @:
-            <meta name="description" content="@(Model.Page.Bag["description"])" />
+            @:<meta name="description" content="@(Model.Page.Bag["description"])" />
+            @:<meta property="og:description" content="shendrick.net: @(Model.Page.Bag["description"])" />
         }
-}
+    }
+
+    <meta property="og:title" content="shendrick.net: @Model.Page.Title" />
+    <meta property="og:url" content="@(Model.Site.Config["url"])@Model.Page.Url" />
+    <meta property="og:site_name" content="@(Model.Site.Config["title"])" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@@xforever1313" />
+    <meta property="og:type" content="article" />
 
     <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Blog Feed" />
     <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Blog Feed" />
@@ -39,8 +49,12 @@
     <!-- BOOTSTRAP STYLES-->
     <link href="/static/css/bootstrap.css" rel="stylesheet" />
 
-    <!-- FONTAWESOME STYLES-->
-    <link href="/static/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Font-Awesome -->
+    <link rel="stylesheet" href="/static/css/fa.fontawesome.min.css">
+    <link rel="stylesheet" href="/static/css/fa.brands.min.css">
+    <link rel="stylesheet" href="/static/css/fa.regular.min.css">
+    <link rel="stylesheet" href="/static/css/fa.solid.min.css">
+    <link rel="stylesheet" href="/static/css/fa.v5-font-face.min.css">
 
     <!--CUSTOM BASIC STYLES-->
     <link href="/static/css/basic.css" rel="stylesheet" />
@@ -133,7 +147,7 @@
                                 }
                                 else
                                 {
-                                    @:<li><a href="@thePage.Url"><i class="fa fa-circle-o"></i>@thePage.Title</a></li>
+                                    @:<li><a href="@thePage.Url"><i class="fa-regular fa-circle-dot"></i>@thePage.Title</a></li>
                                 }
                             }
                         </ul>
@@ -141,7 +155,7 @@
                     <li>
                         <a href="#"><i class="fa fa-file-text"></i>Posts<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
-                            <li><a href="/posts.html"><i class="fa fa-circle-o"></i>All Posts</a></li>
+                            <li><a href="/posts.html"><i class="fa-regular fa-circle-dot"></i>All Posts</a></li>
                             @foreach( var category in Model.Site.Categories )
                             {
                                 foreach( var page in Model.Site.Pages )
@@ -150,7 +164,7 @@
                                     {
                                         if( category.Name.Equals( page.Bag["category"] ) )
                                         {
-                                            @:<li><a href="@(page.Url)"><i class="fa fa-circle-o"></i>@(category.Name)</a></li>
+                                            @:<li><a href="@(page.Url)"><i class="fa-regular fa-circle-dot"></i>@(category.Name)</a></li>
                                         }
                                     }
                                 }
@@ -165,26 +179,23 @@
                         }
                         else
                         {
-                            @:<li><a href="@thePage.Url"><i class="fa fa-circle-o"></i>@thePage.Title</a></li>
+                            @:<li><a href="@thePage.Url"><i class="fa-regular fa-circle-dot"></i>@thePage.Title</a></li>
                         }
                     }
                     <li>
                         <a href="#"><i class="fa fa-users"></i>Follow Me!<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="https://twitter.com/xforever1313" target="_blank" rel="noopener noreferrer nofollow"><i class="fa fa-twitter"></i>Twitter</a>
+                                <a href="https://twitter.com/xforever1313" target="_blank" rel="noopener noreferrer nofollow"><i class="fa-brands fa-square-twitter"></i>Twitter</a>
                             </li>
                             <li>
-                                <a rel="me" href="https://tech.lgbt/@@xforever1313" target="_blank" rel="noopener noreferrer nofollow"><i class="fa fa-mastodon"></i>Mastodon</a>
+                                <a rel="me" href="https://tech.lgbt/@@xforever1313" target="_blank" rel="noopener noreferrer nofollow"><i class="fa-brands fa-mastodon"></i>Mastodon</a>
                             </li>
                             <li>
-                                <a href="https://github.com/xforever1313" target="_blank" rel="noopener noreferrer nofollow"><i class="fa fa-github"></i>GitHub</a>
+                                <a href="https://github.com/xforever1313" target="_blank" rel="noopener noreferrer nofollow"><i class="fa-brands fa-square-github"></i>GitHub</a>
                             </li>
                             <li>
-                                <a href="https://gitlab.com/xforever1313" target="_blank" rel="noopener noreferrer nofollow"><i class="fa fa-gitlab" aria-hidden="true"></i>GitLab</a>
-                            </li>
-                            <li>
-                                <a href="https://www.linkedin.com/pub/seth-hendrick/47/847/615" target="_blank" rel="noopener noreferrer nofollow"><i class="fa fa-linkedin"></i>LinkedIn</a>
+                                <a href="https://www.linkedin.com/pub/seth-hendrick/47/847/615" target="_blank" rel="noopener noreferrer nofollow"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
                             </li>
                             <li>
                                 <a href="https://www.strava.com/athletes/14128419" target="_blank" rel="noopener noreferrer nofollow"><i class="fa fa-map-signs" aria-hidden="true"></i>Strava</a>
@@ -204,7 +215,10 @@
                                 <a href="https://troop53stories.shendrick.net/" target="_blank" rel="noopener noreferrer nofollow"><i class="fa fa-map-signs"></i>Troop 53 Stories</a>
                             </li>
                             <li>
-                                <a href="https://www.roclongboarding.info/" target="_blank" rel="noopener noreferrer nofollow"><i class="fa fa-map-o"></i>Rochester Longboarding Info</a>
+                                <a href="https://www.roclongboarding.info/" target="_blank" rel="noopener noreferrer nofollow"><i class="fa-solid fa-map-location-dot"></i>Rochester Longboarding Info</a>
+                            </li>
+                            <li>
+                                <a href="https://bettadelic.art/" target="_blank" rel="noopener noreferrer nofollow"><i class="fa-solid fa-fish-fins"></i>Bettadelic</a>
                             </li>
                         </ul>
                     </li>
