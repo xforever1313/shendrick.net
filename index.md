@@ -1,11 +1,11 @@
 ---
-layout: page
+layout: home
 title: Home
 description: "Seth Hendrick's website!"
 comments: false
 ---
 
-# Welcome!
+## Welcome!
 
 My name is Seth!
 
