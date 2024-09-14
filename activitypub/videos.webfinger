@@ -1,4 +1,5 @@
-"subject":"acct:videos@shendrick.net",
+{
+    "subject":"acct:videos@shendrick.net",
     "links":[
         {
             "rel":"self","type":"application/activity\u002Bjson",
@@ -15,3 +16,4 @@
             "href":"https://shendrick.net/static/img/me.jpg"
         }
     ]
+}
