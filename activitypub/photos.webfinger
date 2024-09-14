@@ -1,0 +1,17 @@
+"subject":"acct:photos@shendrick.net",
+    "links":[
+        {
+            "rel":"self","type":"application/activity\u002Bjson",
+            "href":"https://photos.thegayborhood.club/users/xforever1313"
+        },
+        {
+            "rel":"http://webfinger.net/rel/profile-page",
+            "type":"text/html",
+            "href":"https://photos.thegayborhood.club/xforever1313"
+        },
+        {
+            "rel":"http://webfinger.net/rel/avatar",
+            "type":"image/jpg",
+            "href":"https://shendrick.net/static/img/me.jpg"
+        }
+    ]

@@ -1,0 +1,17 @@
+"subject":"acct:seth@shendrick.net",
+    "links":[
+        {
+            "rel":"self","type":"application/activity\u002Bjson",
+            "href":"https://tech.lgbt/users/xforever1313"
+        },
+        {
+            "rel":"http://webfinger.net/rel/profile-page",
+            "type":"text/html",
+            "href":"https://tech.lgbt/@xforever1313"
+        },
+        {
+            "rel":"http://webfinger.net/rel/avatar",
+            "type":"image/jpg",
+            "href":"https://shendrick.net/static/img/me.jpg"
+        }
+    ]

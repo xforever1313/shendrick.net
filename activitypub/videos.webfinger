@@ -1,0 +1,17 @@
+"subject":"acct:videos@shendrick.net",
+    "links":[
+        {
+            "rel":"self","type":"application/activity\u002Bjson",
+            "href":"https://videos.shendrick.net/accounts/xforever1313"
+        },
+        {
+            "rel":"http://webfinger.net/rel/profile-page",
+            "type":"text/html",
+            "href":"https://videos.shendrick.net/accounts/xforever1313"
+        },
+        {
+            "rel":"http://webfinger.net/rel/avatar",
+            "type":"image/jpg",
+            "href":"https://shendrick.net/static/img/me.jpg"
+        }
+    ]

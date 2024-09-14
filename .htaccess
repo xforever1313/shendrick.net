@@ -5,3 +5,8 @@ exclude_from_navbar: true
 
 @using Pretzel.Logic.Templating.Context
 @Include( "htaccess.cstxt", Model, typeof( PageContext ) )
+
+# Redirect webfingers to the bots webfinger page
+RewriteCond %{REQUEST_URI} ^/.well-known/webfinger$
+RewriteCond %{QUERY_STRING} ^resource=acct:@@(\w+)@@shendrick.net$
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/activitypub/%1.webfinger [R=301,L]
