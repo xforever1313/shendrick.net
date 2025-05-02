@@ -9,19 +9,19 @@ pageindex: 0
 
 ## Ongoing Projects
 
-* [Chaskis](https://github.com/xforever1313/Chaskis)
-  * Plugin-based IRC bot framework written in C#
-
 * [SshRunAs](https://github.com/xforever1313/SshRunAs)
   * A tool that allows one to run a command via SSH while allowing one to specify a username and password via environment variables.
   * Windows only (Use [sshpass](https://linux.die.net/man/1/sshpass) if on unix).
   * Written in C#
 
-* [Cake.ArgumentBinder](https://github.com/cake-contrib/Cake.ArgumentBinder)
-  * An addin to [Cake](https://cakebuild.net/) that allows one to bind command line arguments to properties in a C# class.
+* [Jaller](https://github.com/xforever1313/Jaller)
+  * A more advanced [IPFS](https://ipfs.tech/) Gateway that allows gateway admins to filter out which files are allowed to be downloaded from their gateway.
+  * Provides searching capability for IPFS.
+  * Live demo at [https://ipfs.shendrick.net](https://ipfs.shendrick.net)
 
-* [Cake.LicenseHeaderUpdater](https://github.com/cake-contrib/Cake.LicenseHeaderUpdater)
-  * An addin to [Cake](https://cakebuild.net/) that allows one to mass update the license headers in source code files.
+* [Rau](https://github.com/xforever1313/Rau)
+  * A plugin-based AT-Proto bot framework.
+  * Allows users to post to BlueSky.
 
 ## Other Websites
 
@@ -35,11 +35,24 @@ Other websites I own
 
 * [Bettadelic](https://bettadelic.art)
   * A website that posts an algorithmically generated picture of my betta fish every day.
-  * Also automatically posts to [Twitter](twitter.com/bettadelic) and [DeviantArt](deviantart.com/bettadelic).
+  * Also automatically posts to [BlueSky](https://bsky.app/profile/bettadelic.art), [Pixelfed](https://photos.thegayborhood.club/bettadelic), and [DeviantArt](https://deviantart.com/bettadelic).
+
+* [Jaller IPFS Gateway](https://ipfs.shendrick.net)
+  * A more advanced [IPFS](https://ipfs.tech/) Gateway that allows gateway admins to filter out which files are allowed to be downloaded from their gateway.
+  * Provides searching capability for IPFS.
 
 ## "Done" Projects
 
 Projects that are no longer getting updates.
+
+* [Chaskis](https://github.com/xforever1313/Chaskis)
+  * Plugin-based IRC bot framework written in C#
+
+* [Cake.ArgumentBinder](https://github.com/cake-contrib/Cake.ArgumentBinder)
+  * An addin to [Cake](https://cakebuild.net/) that allows one to bind command line arguments to properties in a C# class.
+
+* [Cake.LicenseHeaderUpdater](https://github.com/cake-contrib/Cake.LicenseHeaderUpdater)
+  * An addin to [Cake](https://cakebuild.net/) that allows one to mass update the license headers in source code files.
 
 * [HVCC_Clock Twitter](https://twitter.com/HVCC_Clock)
   * A Twitter bot of my community college's clock tower that chimes every hour on the hour.
