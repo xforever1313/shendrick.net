@@ -9,7 +9,10 @@ pageindex: 0
 
 ## Quick Facts
 
-* **Employer:** [L3Harris Technologies](https://www.l3harris.com/)
+* **Current Employer:** [L3Harris Technologies](https://www.l3harris.com/)
+* **Former Employers:**
+  * [Markem-Imaje](https://www.markem-imaje.com/)
+  * [Evergeen Country Club](https://web.archive.org/web/20170414225622/http://evergreencountryclub.com/)
 * **College Attended:** [Rochester Institute of Technology](https://www.rit.edu/)
   * Bachelor of Science in Computer Engineering
   * Minor in Game Design and Development
@@ -21,13 +24,13 @@ pageindex: 0
   * Graduated June 2011
 * **Preferred Pronouns:** He/Him
 * **Orientation:** Gay 🏳️‍🌈
-* **Eagle Scout?:** Yes!  I was part of [Troop 53](https://troop53stories.shendrick.net/) in Castleton, NY.
+* **Eagle Scout?:** Yes!  I was part of [Troop 53](https://bsatroop53.com/) in Castleton, NY.
 * **Hobbies**
   * Programming
   * Free and Open Source Software
   * Video Games
   * Longboarding (I even have a [website](https://www.roclongboarding.info/)!)
-  * Skateboarding (Though I am still _really_ new at it)
+  * Amateur Radio (My call sign is [K2SRH](https://www.qrz.com/db/K2SRH)!).
 
 ## Skills
 

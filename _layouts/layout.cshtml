@@ -14,6 +14,8 @@
         if( Model.Page.Bag.ContainsKey( "tags" ) )
         {
             var tagBuilder = new StringBuilder();
+            tagBuilder.Append( "seth,hendrick,xforever1313,shendrick13,k2srh,");
+
             var tags = Model.Page.Bag["tags"] as IEnumerable<string>;
             foreach( string tag in tags ?? Array.Empty<string>() )
             {
@@ -208,6 +210,9 @@
                             </li>
                             <li>
                                 <a href="https://www.strava.com/athletes/14128419" target="_blank" rel="noopener noreferrer nofollow"><i class="fa fa-map-signs" aria-hidden="true"></i>Strava</a>
+                            </li>
+                            <li>
+                                <a href="https://www.qrz.com/db/K2SRH" target="_blank" rel="noopener noreferrer nofollow"><i class="fa-solid fa-walkie-talkie"></i>QRZ</a>
                             </li>
                             <li>
                                 <a href="/atom.xml"><i class="fa fa-rss"></i>ATOM Feed</a>
