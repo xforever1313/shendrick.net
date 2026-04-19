@@ -9,8 +9,9 @@ pageindex: 0
 
 ## Quick Facts
 
-* **Current Employer:** [L3Harris Technologies](https://www.l3harris.com/)
+* **Current Employer:** [Safran Federal Systems](https://www.safranfederalsystems.com/)
 * **Former Employers:**
+  * [L3Harris Technologies](https://www.l3harris.com/)
   * [Markem-Imaje](https://www.markem-imaje.com/)
   * [Evergeen Country Club](https://web.archive.org/web/20170414225622/http://evergreencountryclub.com/)
 * **College Attended:** [Rochester Institute of Technology](https://www.rit.edu/)
@@ -61,7 +62,7 @@ pageindex: 0
 
 * **Weaknesses:**
   * [SQL](https://en.wikipedia.org/wiki/SQL)
-  * Front-end work
+  * Web-based front-end work
   * [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
   * [Dairy](https://en.wikipedia.org/wiki/Lactose_intolerance)
 

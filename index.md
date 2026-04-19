@@ -10,7 +10,7 @@ comments: false
 My name is Seth!
 
 * I graduated from RIT with a B.S. in Computer Engineering in 2014.
-* I currently work at L3Harris Technologies in Rochester, NY as a Software Engineer, where I write Automated Tests.
+* I currently work at [Safran Federal Systems](https://www.safranfederalsystems.com/) in Rochester, NY as a Software Engineer, where I write desktop C# applications.
 * My favorite programming language is C#.
 * My favorite color is green.
 * My amateur radio call sign is [K2SRH](https://www.qrz.com/db/K2SRH).
