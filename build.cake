@@ -1,6 +1,6 @@
 string target = Argument( "target", "taste" );
 
-const string dotnetVersion = "net8.0";
+const string dotnetVersion = "net10.0";
 
 const string pretzelExe = $"./_pretzel/src/Pretzel/bin/Debug/{dotnetVersion}/Pretzel.dll";
 const string pluginDir = "./_plugins";
